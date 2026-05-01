@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FluidVibe Web</title>
+  <style>
+    :root {
+      color-scheme: dark light;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: linear-gradient(180deg, #9cc7ff 0%, #5d8fd1 45%, #2f4f7c 100%);
+    }
+    #sim {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      cursor: crosshair;
+    }
+    .hud {
+      position: fixed;
+      left: 12px;
+      top: 12px;
+      color: #d9f1ff;
+      background: rgba(19, 39, 70, 0.45);
+      border: 1px solid rgba(180, 220, 255, 0.35);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 13px;
+      line-height: 1.45;
+      backdrop-filter: blur(2px);
+      user-select: none;
+      white-space: pre-line;
+    }
+    .panel {
+      position: fixed;
+      right: 12px;
+      top: 12px;
+      width: min(420px, calc(100vw - 24px));
+      color: #e8f2ff;
+      background: rgba(18, 26, 42, 0.62);
+      border: 1px solid rgba(176, 208, 255, 0.36);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 12px;
+      line-height: 1.45;
+      backdrop-filter: blur(2px);
+      box-sizing: border-box;
+    }
+    .panel h3 {
+      margin: 0 0 6px;
+      font-size: 13px;
+      color: #fff;
+    }
+    .panel code {
+      display: block;
+      margin: 6px 0;
+      padding: 6px 8px;
+      background: rgba(0, 0, 0, 0.28);
+      border-radius: 6px;
+      overflow-wrap: anywhere;
+    }
+    .panel .links a {
+      color: #9fd0ff;
+      margin-right: 10px;
+      text-decoration: none;
+    }
+    .panel .links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="sim"></canvas>
+  <div id="hud" class="hud"></div>
+  <div class="panel">
+    <h3>Web 预览模式（非核心渲染）</h3>
+    建议把 3D 主体验放在本地程序运行，Web 仅做预览和交互验证。
+    <code>python fluid_sim_3d.py --particles 120000 --width 1280 --height 720</code>
+    <div class="links">
+      <a href="/web/index.html?mode=2d">2D 预览</a>
+      <a href="/web/index.html?mode=3d">3D 预览</a>
+    </div>
+  </div>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
