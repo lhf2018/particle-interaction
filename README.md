@@ -3,6 +3,7 @@
 基于 Python + CUDA 的实时粒子流体实验项目，包含：
 
 - 本地高性能 3D 程序（推荐主体验）
+- **2D 黑洞–行星粒子模拟**（`black_hole_planet_2d.py`，Matplotlib + CuPy/NumPy，独立窗口）
 - FastAPI + WebSocket 预览服务（用于轻量交互和联调）
 
 ## 实验原理文档
@@ -23,14 +24,19 @@
 
 ![FluidVibe Screenshot 2](img_1.png)
 
+![2D 黑洞吞噬行星模拟（`black_hole_planet_2d.py`）](img_2.png)
+
 ## 目录结构
 
 ```text
 .
 ├── fluid_sim.py                 # 2D 本地粒子程序
 ├── fluid_sim_3d.py              # 3D 本地主程序（推荐）
+├── black_hole_planet_2d.py      # 2D 黑洞吞噬行星模拟（CuPy 优先，截图见 img_2.png）
 ├── app.py                       # FastAPI 服务（含 ws/sim 与 ws/sim3d）
 ├── web/                         # Web 预览前端
+├── img.png / img_1.png          # FluidVibe 流体截图
+├── img_2.png                    # 黑洞模拟界面截图（对应 black_hole_planet_2d.py）
 ├── requirements.txt
 └── docs/
     └── TECHNICAL_PRINCIPLES.md  # 技术实现原理
@@ -60,6 +66,16 @@ python fluid_sim_3d.py --particles 120000 --width 1280 --height 720
 python fluid_sim.py
 ```
 
+### 2b) 2D 黑洞–行星模拟（独立脚本）
+
+牛顿引力 + 可选粒子自引力；优先使用 **CUDA（CuPy）**，无 GPU 时回退 **NumPy**。窗口内双列滑块调节物理参数，旁附中文说明。
+
+```bash
+python black_hole_planet_2d.py
+```
+
+依赖：`matplotlib`、`numpy`；GPU 路径需与本机 CUDA 匹配的 `cupy`（见 `requirements.txt`）。
+
 ### 3) Web 预览服务
 
 ```bash
@@ -84,4 +100,5 @@ python app.py
 
 - Web 版本定位为预览，不建议作为最终性能体验入口。
 - 若 `CuPy` 不可用，Web 服务会自动回退到 CPU 模式（可运行但性能较低）。
+- 黑洞模拟（`black_hole_planet_2d.py`）与 Web 前端无关；截图 **`img_2.png`** 对应该脚本的典型界面。
 
